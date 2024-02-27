@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hot Gadgets</title>
     <!-- custom css -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <!-- daisy ui and tailwind -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="poppins">
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="poppins">
     <!-- header section -->
-    <header>
-        <h2 class="text-6xl">Apple Iphone 13 Pro Max</h2>
+    <header class="container mx-auto px-4 lg:px-24 my-14">
+      <h2 class="text-6xl">Apple Iphone 13 Pro Max</h2>
     </header>
 
     <!-- main section -->
-    <main></main>
+    <main class="container mx-auto px-4 lg:px-24">
+
+        <section>
+            <input id="search-field" type="text" placeholder="Search...." class="input input-ghost w-full max-w-xs  border-2 border-gray-600" />
+            <button onclick="handleSearch()" class="btn btn-secondary">Search</button>
+        </section>
+
+        <!-- search result -->
+      <section class="m-4 bg-gray-100 p-4">
+        <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+        </div>
+      </section>
+    </main>
 
     <!-- footer section -->
     <footer></footer>
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
