@@ -1,8 +1,7 @@
 const showAllPhoneButton = document.getElementById("show-all-container");
 const spinnerContainer = document.getElementById("spinner-container");
 
-
-const loadPhone = async (searchText,isShowAll) => {
+const loadPhone = async (searchText = "13", isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
@@ -10,7 +9,7 @@ const loadPhone = async (searchText,isShowAll) => {
   const data = await res.json();
   const phones = data.data;
 
-  displayPhones(phones,isShowAll);
+  displayPhones(phones, isShowAll);
 };
 
 const displayPhones = (phones, isShowAll) => {
@@ -28,12 +27,10 @@ const displayPhones = (phones, isShowAll) => {
     showAllPhoneButton.classList.add("hidden");
   }
 
-    // display only first 12 phone if not show all
-    if (!isShowAll) {
-        phones = phones.slice(0, 12);
-    }
-
-
+  // display only first 12 phone if not show all
+  if (!isShowAll) {
+    phones = phones.slice(0, 12);
+  }
 
   phones.forEach((phone) => {
     // console.log(phone);
@@ -64,45 +61,77 @@ const displayPhones = (phones, isShowAll) => {
   });
 
   //hide loading spinner
-  toggleLoadingSpinner(false)
+  toggleLoadingSpinner(false);
 };
 
 //
-const handleShowDetails = async (id) =>{
-    // console.log(id);
-    // load in single phone data
-    const res = await fetch(
-      `https://openapi.programming-hero.com/api/phone/${id}`
-    );
+const handleShowDetails = async (id) => {
+  // console.log(id);
+  // load in single phone data
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${id}`
+  );
 
-    const data = await res.json();
-    console.log(data);
-}
+  const data = await res.json();
+  const phone = data.data;
+  showPhoneDetails(phone);
+};
+
+const showPhoneDetails = (phone) => {
+  //   const phoneName = document.getElementById("show-details-phone-name");
+  //   phoneName.innerText = phone.name;
+  const showDetailsContainer = document.getElementById(
+    "show-details-container"
+  );
+
+  showDetailsContainer.innerHTML = `
+     <figure class="bg-slate-100">
+            <img
+                src="${phone.image}"
+                alt="${phone.image}"
+            />
+            </figure>
+            <div class="card-body">
+            <h2 class="card-title">${phone?.name}</h2>
+            <p class="text-sm"> <span class="font-bold">Storage:</span> ${phone?.mainFeatures?.storage}</p>
+            <p class="text-sm"> <span class="font-bold">Display Size:</span> ${phone?.mainFeatures?.displaySize}</p>
+            <p class="text-sm"> <span class="font-bold">Chipset:</span> ${phone?.mainFeatures?.chipSet}</p>
+              <p class="text-sm"> <span class="font-bold">Memory:</span> ${phone?.mainFeatures?.memory}</p>
+              <p class="text-sm"> <span class="font-bold">Slug:</span> ${phone?.slug}</p>
+              <p class="text-sm"> <span class="font-bold">Release data :</span> ${phone?.releaseDate}</p>
+              <p class="text-sm"> <span class="font-bold">Brand:</span> ${phone?.brand}</p>
+                <p class="text-sm"> <span class="font-bold">GPS:</span> ${phone?.others?.GPS}</p>
+
+
+            </div>
+
+    `;
+
+  console.log(phone);
+  // show the modal
+  show_details_modal.showModal();
+};
 
 const handleSearch = (isShowAll) => {
-    toggleLoadingSpinner(true);
+  toggleLoadingSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
 
-  loadPhone(searchText,isShowAll);
-//   searchField.value = "";
+  loadPhone(searchText, isShowAll);
+  //   searchField.value = "";
 };
 
-
-const toggleLoadingSpinner = (isLoading) =>{
-    if (isLoading) {
-
-        spinnerContainer.classList.remove("hidden");
-    }else{
-        spinnerContainer.classList.add("hidden");
-
-    }
-}
+const toggleLoadingSpinner = (isLoading) => {
+  if (isLoading) {
+    spinnerContainer.classList.remove("hidden");
+  } else {
+    spinnerContainer.classList.add("hidden");
+  }
+};
 
 // handle show all
-const handleShowAll = () =>{
-    handleSearch(true);
-}
+const handleShowAll = () => {
+  handleSearch(true);
+};
 
-
-// loadPhone();
+loadPhone();
