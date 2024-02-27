@@ -24,15 +24,28 @@
     <!-- main section -->
     <main class="container mx-auto px-4 lg:px-24">
 
+        <!-- search -->
         <section>
             <input id="search-field" type="text" placeholder="Search...." class="input input-ghost w-full max-w-xs  border-2 border-gray-600" />
             <button onclick="handleSearch()" class="btn btn-secondary">Search</button>
         </section>
 
         <!-- search result -->
-      <section class="m-4 bg-gray-100 p-4">
+      <section class="m-4  p-4">
+
+        <!-- spinner or loader -->
+        <div id="spinner-container" class="text-center my-40 hidden">
+            <span  class="loading text-primary loading-spinner loading-lg"></span>
+        </div>
+
         <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         </div>
+
+        <!-- show all button -->
+        <div id="show-all-container" class="hidden">
+            <button  class="btn btn-secondary">Show All</button>
+        </div>
+
       </section>
     </main>
 
