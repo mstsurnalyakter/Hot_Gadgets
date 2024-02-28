@@ -1,10 +1,11 @@
-const errorContainer = document.getElementById("error-container");
+
 const loadPhones = async (searchText = "iphone", isShowAll) => {
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchText}`
   );
   const data = await res.json();
   const phones = data.data;
+  const errorContainer = document.getElementById("error-container");
   if (phones.length === 0) {
     errorContainer.classList.remove("hidden");
   } else {
